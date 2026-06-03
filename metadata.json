@@ -1,0 +1,6 @@
+{
+  "name": "Atlas Flow",
+  "description": "A futuristic SaaS platform for AI automation, workflow intelligence, and real-time business optimization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
