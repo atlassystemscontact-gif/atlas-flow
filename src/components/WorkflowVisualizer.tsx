@@ -12,7 +12,7 @@ interface WorkflowVisualizerProps {
 }
 
 export default function WorkflowVisualizer({ nodes, edges, onTriggerLog, onUpdateNodes }: WorkflowVisualizerProps) {
-  const { theme, t, language } = useApp();
+  const { t, language } = useApp();
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
   const [activeSimulationIndex, setActiveSimulationIndex] = useState<number | null>(null);
@@ -397,7 +397,7 @@ export default function WorkflowVisualizer({ nodes, edges, onTriggerLog, onUpdat
                       ? "rgba(16, 185, 129, 0.55)"
                       : node.status === 'error'
                       ? "rgba(244, 63, 94, 0.7)"
-                      : theme === 'light' ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.06)",
+                      : "rgba(255,255,255,0.06)",
                     boxShadow: isSelected
                       ? "0 0 24px rgba(245,158,11,0.18)"
                       : node.status === 'running'
@@ -408,10 +408,10 @@ export default function WorkflowVisualizer({ nodes, edges, onTriggerLog, onUpdat
                       ? "0 0 22px rgba(244,63,94,0.18)"
                       : "0 0 0px rgba(0,0,0,0)",
                     backgroundColor: isSelected
-                      ? theme === 'light' ? "rgba(255,255,255,0.98)" : "rgba(12,12,24,0.95)"
+                      ? "rgba(12,12,24,0.95)"
                       : node.status === 'running'
-                      ? theme === 'light' ? "rgba(129,140,248,0.06)" : "rgba(129,140,248,0.05)"
-                      : theme === 'light' ? "rgba(255,255,255,0.88)" : "rgba(6,6,18,0.80)",
+                      ? "rgba(129,140,248,0.05)"
+                      : "rgba(6,6,18,0.80)",
                     scale: isSelected ? 1.05 : 1.0,
                   }}
                   transition={{

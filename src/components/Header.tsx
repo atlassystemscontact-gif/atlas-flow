@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Terminal as TermIcon, ShieldAlert, Sun, Moon, Globe, Zap } from "lucide-react";
+import { Terminal as TermIcon, ShieldAlert, Globe, Zap } from "lucide-react";
 import { useApp } from "../AppContext";
 
 interface HeaderProps {
@@ -10,7 +10,7 @@ interface HeaderProps {
 
 export default function Header({ currentTab, setCurrentTab, usingFallback = false }: HeaderProps) {
   const [systime, setSystime] = useState<string>("00:00:00 UTC");
-  const { theme, setTheme, language, setLanguage, t } = useApp();
+  const { language, setLanguage, t } = useApp();
 
   useEffect(() => {
     const updateTime = () => {
@@ -91,22 +91,8 @@ export default function Header({ currentTab, setCurrentTab, usingFallback = fals
             <span className="text-white/50 tabular-nums">{systime}</span>
           </div>
 
-          {/* Theme + Language toggles */}
+          {/* Language toggle */}
           <div className="flex items-center gap-0.5 bg-white/[0.04] border border-white/[0.06] p-1 rounded-lg">
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-1.5 hover:bg-white/10 rounded-md transition-all flex items-center justify-center cursor-pointer text-white/40 hover:text-white/80"
-              title={theme === 'dark' ? t("themeLight") : t("themeDark")}
-            >
-              {theme === "dark" ? (
-                <Sun className="w-3.5 h-3.5 text-amber-400 animate-pulse-slow" />
-              ) : (
-                <Moon className="w-3.5 h-3.5 text-neon-blue" />
-              )}
-            </button>
-
-            <div className="w-px h-3.5 bg-white/[0.08]"></div>
-
             <button
               onClick={() => setLanguage(language === 'en' ? 'pt' : 'en')}
               className="px-2 py-1 text-[9px] font-mono font-bold hover:bg-white/10 rounded-md transition-all flex items-center gap-1 cursor-pointer text-white/40 hover:text-white/80"

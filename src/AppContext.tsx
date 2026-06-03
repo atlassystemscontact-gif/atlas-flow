@@ -1,13 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export type Language = "en" | "pt";
-export type Theme = "dark" | "light";
 
 export interface AppContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
   t: (key: string) => string;
 }
 
@@ -133,10 +130,8 @@ const translations: Record<Language, Record<string, string>> = {
     synthesizingBtn: "Analyzing Stats...",
     thisSession: "active integrations",
 
-    // Theme tooltips / names
+    // Settings label
     settingsLabel: "SETTINGS // ESTADO",
-    themeLight: "Light Theme",
-    themeDark: "Dark Theme",
     langEn: "English",
     langPt: "Português",
 
@@ -280,10 +275,8 @@ const translations: Record<Language, Record<string, string>> = {
     synthesizingBtn: "Carregando Métricas...",
     thisSession: "conexões de automação",
 
-    // Theme tooltips / names
+    // Settings label
     settingsLabel: "CONFIGURAÇÕES // IDIOMA",
-    themeLight: "Modo Claro",
-    themeDark: "Modo Escuro",
     langEn: "English",
     langPt: "Português",
 
@@ -316,24 +309,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     return (saved === "pt" || saved === "en") ? saved : "en";
   });
 
-  const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem("atlas_theme");
-    return (saved === "light" || saved === "dark") ? saved : "dark";
-  });
-
   useEffect(() => {
     localStorage.setItem("atlas_lang", language);
+    document.documentElement.classList.remove("light");
   }, [language]);
-
-  useEffect(() => {
-    localStorage.setItem("atlas_theme", theme);
-    const root = document.documentElement;
-    if (theme === "light") {
-      root.classList.add("light");
-    } else {
-      root.classList.remove("light");
-    }
-  }, [theme]);
 
   const t = (key: string): string => {
     const userLangDict = translations[language];
@@ -345,7 +324,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AppContext.Provider value={{ language, setLanguage, theme, setTheme, t }}>
+    <AppContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </AppContext.Provider>
   );
